@@ -1,0 +1,265 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brújula Workshop</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: radial-gradient(
+                circle at center,
+                rgba(0, 201, 167, 0.15) 0%,
+                rgba(0, 201, 167, 0.05) 30%,
+                rgba(0, 12, 24, 1) 70%
+            );
+            background-color: #001218;
+            background-attachment: fixed;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #E0E0E0;
+            line-height: 1.6;
+        }
+
+        .header {
+            width: 100%;
+            text-align: center;
+            padding: 40px 0;
+            background: transparent;
+            position: relative;
+            overflow: visible;
+            margin-bottom: 20px;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            right: -50%;
+            bottom: -50%;
+            background: radial-gradient(
+                circle at center,
+                rgba(0, 201, 167, 0.08) 0%,
+                rgba(0, 201, 167, 0.05) 40%,
+                transparent 70%
+            );
+            pointer-events: none;
+            filter: blur(20px);
+        }
+
+        .logo-container {
+            position: relative;
+            display: inline-block;
+            padding: 20px;
+            width: 400px;
+        }
+
+        .logo {
+            display: none;
+        }
+
+        .video-logo {
+            width: 100%;
+            height: auto;
+            position: relative;
+            z-index: 2;
+            border-radius: 10px;
+            mask-image: radial-gradient(circle at center, 
+                black 30%,
+                rgba(0, 0, 0, 0.9) 60%,
+                rgba(0, 0, 0, 0.1) 90%,
+                transparent 100%
+            );
+            -webkit-mask-image: radial-gradient(circle at center, 
+                black 30%,
+                rgba(0, 0, 0, 0.9) 60%,
+                rgba(0, 0, 0, 0.1) 90%,
+                transparent 100%
+            );
+            filter: drop-shadow(0 0 15px rgba(0, 201, 167, 0.3)) brightness(1.4);
+        }
+
+        .glow-effect {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 160%;
+            height: 160%;
+            background: radial-gradient(
+                circle at center,
+                rgba(0, 201, 167, 0.25) 0%, 
+                rgba(0, 201, 167, 0.15) 30%,
+                rgba(0, 201, 167, 0.08) 50%,
+                transparent 70%
+            );
+            filter: blur(20px);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .content {
+            padding: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+            background: linear-gradient(
+                135deg,
+                rgba(0, 12, 24, 0.7) 0%,
+                rgba(0, 12, 24, 0.5) 100%
+            );
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 201, 167, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 201, 167, 0.1);
+        }
+
+        .intro-quote {
+            text-align: center;
+            font-size: 1.4em;
+            margin: 2em 0;
+            font-style: italic;
+            line-height: 1.8;
+        }
+
+        h2 {
+            color: #00e0d3;
+            text-shadow: 0 0 10px rgba(0, 201, 167, 0.3);
+            margin-top: 2em;
+        }
+
+        .schedule-item {
+            margin: 1em 0;
+        }
+
+        .emoji {
+            font-size: 1.2em;
+        }
+
+        .price-section {
+            background: linear-gradient(
+                135deg,
+                rgba(0, 12, 24, 0.8) 0%,
+                rgba(0, 12, 24, 0.6) 100%
+            );
+            padding: 25px;
+            border-radius: 12px;
+            margin: 2em 0;
+            border: 1px solid rgba(0, 201, 167, 0.15);
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        ul li {
+            margin: 0.8em 0;
+            padding-left: 1.5em;
+            position: relative;
+        }
+
+        ul li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #00e0d3;
+        }
+
+        .register-button {
+            display: block;
+            width: fit-content;
+            margin: 2em auto;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #00e0d3, #00c9a7);
+            color: #001218;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 1.2em;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(0, 201, 167, 0.3);
+            border: 2px solid transparent;
+        }
+
+        .register-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(0, 201, 167, 0.5);
+            background: transparent;
+            color: #00e0d3;
+            border: 2px solid #00e0d3;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo-container">
+            <div class="glow-effect"></div>
+            <img src="Captura de Pantalla 2025-05-29 a la(s) 09.51.16.png" alt="Brújula Workshop Logo" class="logo">
+            <video class="video-logo" autoplay loop muted playsinline>
+                <source src="20250527_1609_Missing Scene Imagery_storyboard_01jw9jcz74e1ka7va17wymh96w.mov" type="video/mp4">
+            </video>
+        </div>
+    </header>
+    <div class="content">
+        <p class="intro-quote">
+            Reconecta con tu brújula interna y redescubre el poder de orientarte desde tu propia consciencia.
+        </p>
+
+        <h2>¿De qué se trata este Workshop?</h2>
+        <p>BRÚJULA es un taller vivencial que te invita a redescubrir y activar tu brújula interna: ese sistema de orientación psíquica y biológica que habita en todos nosotros, para alinearte con tu propósito y sincronizarte con tu entorno.</p>
+
+        <p>Partimos de la premisa de que cada ser humano posee un aparato psíquico capaz de direccionar sus decisiones y acciones cotidianas. Sin embargo, en muchos casos, este mecanismo ha quedado dormido o desconectado de su potencial. El objetivo del Workshop es reactivar esa tecnología interna a través de la conciencia, la mente, el cuerpo y una lógica multidimensional.</p>
+
+        <p>Durante el encuentro trabajaremos sobre lo subatómico, atómico, molecular y anatómico, reconociendo al cuerpo humano como una arquitectura viva y multidimensional.</p>
+
+        <p>Este es solo el comienzo de una transformación profunda: entender que todo está interconectado y asumir la responsabilidad de que nuestras acciones impactan realidades cada vez más amplias.</p>
+
+        <h2>Temática del Workshop</h2>
+        <p>Este workshop es una invitación a:</p>
+        <ul>
+            <li>Observar síntomas y conflictos desde una lógica multidimensional.</li>
+            <li>Incorporar prácticas conscientes en la vida cotidiana.</li>
+            <li>Explorar los planos de la realidad y la percepción.</li>
+            <li>Comprender el cuerpo como una arquitectura escalar: subatómico, atómico, molecular y anatómico.</li>
+            <li>Reconectar con la brújula interna como guía diaria.</li>
+        </ul>
+
+        <h2><span class="emoji">🗓️</span> Fechas y horarios</h2>
+        <div class="schedule-item">
+            <strong>Encuentros principales:</strong><br>
+            <span class="emoji">📅</span> Sábado 14 y domingo 15 de junio de 2025<br>
+            <span class="emoji">🕒</span> Horario: 10:00 a 13:00 (hora de Argentina)
+        </div>
+
+        <div class="schedule-item">
+            <strong>Encuentro de integración y preguntas:</strong><br>
+            <span class="emoji">📅</span> Sábado 21 de junio de 2025<br>
+            <span class="emoji">🕒</span> Horario: 11:00 a 13:00 (hora de Argentina)
+        </div>
+
+        <h2><span class="emoji">💰</span> Valor del Workshop</h2>
+        <div class="price-section">
+            <p>USD 55 (para participantes internacionales)</p>
+            <p>ARS $55.000 (para residentes en Argentina)</p>
+        </div>
+
+        <h2><span class="emoji">📝</span> Para inscribirte</h2>
+        <p>Completá el siguiente formulario y reservá tu lugar en el Workshop BRÚJULA.<br>
+        Es simple, rápido y vas a recibir toda la info en tu correo.</p>
+        
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeNabtWQoqHEqxi6Pb0y34VR44gRjgUkP_IqYylBc342bSQiQ/viewform?usp=header" 
+           class="register-button" 
+           target="_blank">
+            Inscribirme Ahora
+        </a>
+
+        <p style="text-align: center; font-size: 1.2em; margin-top: 2em; font-style: italic; color: #00e0d3;">
+            ¡Te espero para comenzar este viaje hacia tu brújula interna!
+        </p>
+    </div>
+</body>
+</html>
